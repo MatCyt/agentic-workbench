@@ -3,7 +3,7 @@
 Project-specific context and requirements lives in ./ARCHITECTURE.md
 
 ## Communication 
-- Answer shortly by default, talk in ASD-STE100 Simplified Technical English.
+- When reporting information to me, be extremely concise and sacrifice grammar for the sake of concision, avoid technical jargon and speak in ASD-STE100 Simplified Technical English.
 - When asked for a recommended solution, shortly list pros and cons plus alternative approaches.
 - For conceptual or feasibility questions, answer in chat first; wait for my go-ahead before implementing.
 - If a requirement is ambiguous and the choice is hard to reverse, ask; otherwise pick the simplest option and say so.
