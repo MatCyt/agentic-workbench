@@ -1,6 +1,6 @@
 ---
 name: -ship-it
-description: Commit all changes and raise a PR. Only run when the user explicitly invokes /-ship-it.
+description: Commit all changes and raise a PR.
 user-invocable: true
 argument-hint: "[branch: target branch / mandatory; context: spec/ticket/intent for / optional]"
 
