@@ -1,6 +1,6 @@
 ---
 name: -implement-spec
-description: Implement a spec produced by /-to-spec-delegated. Orchestrates implementer subagents over the issue graph on one integration branch, then reviews and ships.
+description: Implement a spec that /-to-issues-agentic cut into issues. Orchestrates implementer subagents over the issue graph on one integration branch, then reviews and ships.
 disable-model-invocation: true
 user-invocable: true
 argument-hint: "[spec dir: .scratch/specs/<feature>/ — default: the only or newest one]"
@@ -8,7 +8,9 @@ argument-hint: "[spec dir: .scratch/specs/<feature>/ — default: the only or ne
 
 # Implement Spec
 
-Input: a spec directory `.scratch/specs/<feature>/` containing `spec.md` and `issues/NN-<slug>.md`. If none is given, use the only spec dir; if several exist, use the newest and say so.
+Input: a spec directory `.scratch/specs/<feature>/` containing `spec.md` and `issues-agentic/NN-<slug>.md`. If none is given, use the only spec dir; if several exist, use the newest and say so.
+
+If the spec dir has no `issues-agentic/`, stop and tell the user to run `/-to-issues-agentic` first. Never run `issues-walkthrough/`: the user executes those one at a time.
 
 Goal: the entire spec implemented on a single **integration branch**, every issue `done`, reviewed, and shipped as a PR.
 
@@ -24,7 +26,7 @@ Sparse. Subagents get **context pointers** (absolute spec dir, issue file, integ
 
 ## Steps
 
-1. Read `spec.md` and all issues. Build the graph and the initial frontier.
+1. Read `spec.md` and all issues in `issues-agentic/`. Build the graph and the initial frontier.
 
 2. Create the integration branch `<feature>` from the current base branch. Record the base branch name.
 
@@ -52,7 +54,7 @@ Each implementer subagent:
 - Touches **only the files listed in the issue**. Anything else is out of bounds.
 - Implements "What to build" end to end, including tests, until the Definition of Done passes.
 - May diverge from the spec or issue when implementation shows it is necessary. Every divergence is appended to the issue's **Deviations** section with what changed and why. Divergence without a record is a failure.
-- If the Definition of Done cannot be met, stops, reports why, and the orchestrator marks the issue `blocked`.
+- If the Definition of Done cannot be met, or an assumption listed in the issue's **Assumptions** section proves false, stops, reports why, and the orchestrator marks the issue `blocked`.
 - Makes exactly **one commit**, subject `NN: <issue title>`. No body, no trailers, no AI attribution.
 - Merges the integration branch tip into its own branch before reporting done.
 - Reports in one or two lines: commit SHA, DoD result, whether deviations were recorded.
